@@ -8,61 +8,79 @@
  *	 Saurabh S Dange ©                                                       *
  *   All rights reserved                                                     *
  *****************************************************************************/
+ //Header files declaration
+ #include <stdio.h>
 
-//Header files declaration
-#include <stdio.h>
-
+//function declaration
+int get();
+void print(int,int);
 //---------------------------------------------------------------------------//
 
-int main()
+/******************************************************************************
+ *   Function Name:get                                                        *
+ *   Parameters passed:None                                                   *
+ *   Return Type: int                                                         *
+ *   Description:used for validating the input and storing in the variable    *
+ ******************************************************************************/
+
+int get()
 {
-				// variable declaration //
-        int n,k,i;
+      int n;
+      if(scanf("%d",&n)!=1){
+        printf("Invalid input");
+      }
+      return n;
+}
+//---------------------------------------------------------------------------//
 
-        printf("enter the value of n \n ");
-        scanf("%d",&n);
+/******************************************************************************
+ *   Function Name:print                                                      *
+ *   Parameters passed:Two integers                                           *
+ *   Return Type: void                                                        *
+ *   Description:used for printing the numbers according to the user          *
+ *   requirements                                                             *
+ ******************************************************************************/
+void print(int k,int n)
+{
 
-        printf("enter value of k\n" );
-        scanf("%d",&k);
-
-
-				// to check that number is positive
-				if(k<0){
-
-						printf("invalid input");
-						return;
-
-				}
-
-				// case 1 if given k is positive
-        if(k%2==0)
+  for(i=1;i<=n;i++)
         {
-
-        		for(i=1;i<=n;i++)
-        		{
-                	printf("%d\t",k+2 );
-                	k+=2;
-
-        		}
+              printf("%d\t",k+2 );
+              k+=2;
 
         }
+}
+//---------------------------------------------------------------------------//
 
-				// case 2 if given k is negative
-        else
-        {
-            k+=1;
+//Main function
 
-            for (int i = 1; i<=n; i++)
-            {
+int main()
+{     //variable declaration
+      int n,k,i;
 
-                        printf("%d\t",k );
-                        k+=2;
-            }
+      printf("enter the value of n \n ");
+      n=get();
+
+      printf("enter value of k\n" );
+
+      k=get();
+
+      if (k<0) {
+
+        printf("invalid input");
+        return;
+
+      }
+      if (k%2==0) {
+
+          print(k,n);
+      }
+
+      else
+          print(k+1,n);
 
 
-        }
+      return 0;
 
-				//end of the function
-        return 0;
 
 }
