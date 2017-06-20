@@ -8,9 +8,10 @@
  *   All rights reserved                                                     *
  *****************************************************************************/
 
-//HeaderFiles
+ //HeaderFiles
 #include <stdio.h>
 #include <stdlib.h>
+
 
 //declarationof structure
 struct student
@@ -21,51 +22,48 @@ struct student
 
 }temp1;
 
+//declaration of Function
+
+void getRecord(int ,struct *);
+
+void sortRecord(int,struct *);
+
+void fetchRecord(int,struct *);
+
+//----------------------------------------------------------------------------//
 
 
-int main(int argc, char const *argv[])
- {
-         // Declaration of variables
-         int n,stu,i,j,k;
-         int min;
+/******************************************************************************
+ *   Function Name:getRecord                                                  *
+ *   Parameters passed:number of students,structure                           *                       *
+ *   Return Type: void                                                        *
+ *   Description:used for storing the input in the structure                  *
+ ******************************************************************************/
+void getRecord(int stu,struct *array)
+{
+          int i;
 
-
-
-
-                                 //Taking the input for number of students
-
-         printf("enter the number of students as a integer number\n");
-         if(scanf("%d",&stu)!=1)
-				 {
-					 printf("invalid input");
-				 }
-
-                                 //dynamic allocation for structure
-         struct student *array=malloc(sizeof(struct student)*stu);
-
-
-                                 //Taking the input for number of toppers user wants
-         printf("enter the integer value of n\n");
-         if(scanf("%d",&n)!=1)
-				 {
-					 printf("invalid input");
-
-				 }
-
-
-
-                                 //Enter the marks of the student in the order
-         printf("enter the name and  marks  of students in names\n");
-
-         for ( i = 0; i < stu; i++) {
+          for ( i = 0; i < stu; i++) {
 
                  scanf("%s%d",&array[i].name,&array[i].marks);
 
          }
 
 
-                                 //sorting of the the array to check top n students
-         for(int i=0;i<stu;i++)
+}
+//----------------------------------------------------------------------------//
+
+/******************************************************************************
+ *   Function Name:sortRecord                                                 *
+ *   Parameters passed:number of students,structure                           *                       *
+ *   Return Type: void                                                        *
+ *   Description:used for sorting the content of the structure                *
+ ******************************************************************************/
+void sortRecord(int stu,struct *array)
+{
+          int i;
+
+          for(int i=0;i<stu;i++)
          {
                  min=i;
                  for( j=i+1;j<stu;j++)
@@ -88,16 +86,65 @@ int main(int argc, char const *argv[])
          }
 
 
-                                 // Printing the top scorer
+}
 
-         printf("top %d scorer are\n",n);
+//----------------------------------------------------------------------------//
+/******************************************************************************
+ *   Function Name:fetchRecord                                                *
+ *   Parameters passed:number of students,structure,number of toppers required*                          *                       *
+ *   Return Type: void                                                        *
+ *   Description:used for printing the top scorer                             *
+ ******************************************************************************/
 
-         for(i=stu-1;i>(stu-n-1);i--)
+void fetchRecord(int stu,struct *array,int n)
+{
+          int i;
+
+          for(i=stu-1;i>(stu-n-1);i--)
          {
                   printf("Name=%s\tMarks%d\n",&array[i].name,array[i].marks);
          }
          printf("\n");
+}
+
+//----------------------------------------------------------------------------//
+
+int int main(int argc, char const *argv[]) {
+
+          // Declaration of variables
+          int n,stu,i,j,k;
+          int min;
+
+          //Taking the input for number of students
+          printf("enter the number of students as a integer number\n");
+         if(scanf("%d",&stu)!=1)
+				 {
+					 printf("invalid input");
+				 }
+
+                                 //dynamic allocation for structure
+         struct student *array=malloc(sizeof(struct student)*stu);
 
 
-         return 0;
+                                 //Taking the input for number of toppers user wants
+         printf("enter the integer value of n\n");
+         if(scanf("%d",&n)!=1)
+				 {
+					 printf("invalid input");
+
+				 }
+
+
+
+         //Enter the marks of the student in the order
+         printf("enter the name and  marks  of students in names\n");
+
+         getRecord(stu,&array);
+
+         sortRecord(stu,&array);
+
+         fetchRecord(stu,&array,n);
+
+
+          return 0;
 }
