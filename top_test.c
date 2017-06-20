@@ -1,4 +1,3 @@
-
 /*****************************************************************************
  *   PROJECT  :Print N number of toppers where N is user defined             *
  *   FILE_NAME:top_scorer.c                                                  *
@@ -19,7 +18,7 @@ struct student
 {
 
         int marks;
-        char name;
+        char name[30];
 
 }temp1;
 
@@ -46,7 +45,7 @@ void getRecord(int stu,struct student array[])
 
           for ( i = 0; i < stu; i++) {
 
-                 scanf("%s%d",&array[i].name,&array[i].marks);
+                 scanf("%s %d",array[i].name,&array[i].marks);
 
          }
 
@@ -72,7 +71,7 @@ void sortRecord(int stu,struct student array[])
                  for( j=i+1;j<stu;j++)
                  {
 
-                         if(&array[min].marks>&array[j].marks)
+                         if(array[min].marks>array[j].marks)
                         {
                                  min=j;
                         }
@@ -105,7 +104,7 @@ void fetchRecord(int stu,struct student  array[],int n)
 
           for(i=stu-1;i>(stu-n-1);i--)
          {
-                  printf("Name=%s\tMarks%d\n",&array[i].name,array[i].marks);
+                  printf("Name=%s\tMarks%d\n",array[i].name,array[i].marks);
          }
          printf("\n");
 }
