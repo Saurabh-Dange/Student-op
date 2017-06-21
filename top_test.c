@@ -1,4 +1,3 @@
-
 /*****************************************************************************
  *   PROJECT  :Print N number of toppers where N is user defined             *
  *   FILE_NAME:top_scorer.c                                                  *
@@ -53,7 +52,10 @@ int getRecord(int stu,struct student array[])
                         printf("invalid input\n");
                         return 0;
                         }
-
+                if(isNumber(array[i].name))
+{               printf("invalid output5");
+                return 0;
+}
          }
 return 1;
 
