@@ -1,3 +1,4 @@
+
 /*****************************************************************************
  *   PROJECT  :Print N number of toppers where N is user defined             *
  *   FILE_NAME:top_scorer.c                                                  *
@@ -24,7 +25,7 @@ struct student
 
 //declaration of Function
 
-void getRecord(int ,struct student array[]);
+int getRecord(int ,struct student array[]);
 
 void sortRecord(int,struct student array[]);
 
@@ -36,18 +37,23 @@ void fetchRecord(int,struct student array[],int);
 /******************************************************************************
  *   Function Name:getRecord                                                  *
  *   Parameters passed:number of students,structure                           *                       *
- *   Return Type: void                                                        *
+ *   Return Type: int                                                        *
  *   Description:used for storing the input in the structure                  *
  ******************************************************************************/
-void getRecord(int stu,struct student array[])
+int getRecord(int stu,struct student array[])
 {
           int i;
 
           for ( i = 0; i < stu; i++) {
 
-                 scanf("%s %d",array[i].name,&array[i].marks);
+                if( (scanf("%s",array[i].name)!=1)||scanf("%d",&array[i].marks)!=1)
+                {
+                        printf("invalid input\n");
+                        return 0;
+                        }
 
          }
+return 1;
 
 
 }
@@ -119,9 +125,10 @@ int  main(int argc, char const *argv[]) {
 
           //Taking the input for number of students
           printf("enter the number of students as a integer number\n");
-         if(scanf("%d",&stu)!=1)
+         if((scanf("%d",&stu)!=1)||stu<0)
                                  {
-                                         printf("invalid input");
+                                         printf("invalid input\n");
+                                         return 0;
                                  }
 
                                  //dynamic allocation for structure
@@ -130,10 +137,10 @@ int  main(int argc, char const *argv[]) {
 
                                  //Taking the input for number of toppers user wants
          printf("enter the integer value of n\n");
-         if(scanf("%d",&n)!=1)
+         if((scanf("%d",&n)!=1)||n<0)
                                  {
-                                         printf("invalid input");
-
+                                         printf("invalid input\n");
+                                         return 0;
                                  }
 
 
@@ -141,7 +148,9 @@ int  main(int argc, char const *argv[]) {
          //Enter the marks of the student in the order
          printf("enter the name and  marks  of students in names\n");
 
-         getRecord(stu,array);
+        if( getRecord(stu,array)==0)
+        return 0;
+
 
          sortRecord(stu,array);
 
