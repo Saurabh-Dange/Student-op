@@ -1,4 +1,4 @@
-c
+
 /*****************************************************************************
  *   PROJECT  :Print N number of toppers where N is user defined             *
  *   FILE_NAME:top_scorer.c                                                  *
@@ -38,8 +38,8 @@ int  isNumber(const char []);
 
 /******************************************************************************
  *   Function Name:getRecord                                                  *
- *   Parameters passed:number of students,structure                           *                       *
- *   Return Type: int                                                        *
+ *   Parameters passed:number of students,structure                           *
+ *   Return Type: int                                                         *
  *   Description:used for storing the input in the structure                  *
  ******************************************************************************/
 int getRecord(int stu,struct student array[])
@@ -119,7 +119,14 @@ void fetchRecord(int stu,struct student  array[],int n)
 
 //----------------------------------------------------------------------------//
 
-//*********************************************************
+//----------------------------------------------------------------------------//
+
+/******************************************************************************
+*   Function Name:isNumber                                                    *
+*   Parameters passed:string from command line                                *
+*   Return Type:int                                                           *
+*   Description:This is used for validating if input is integer or not        *
+*******************************************************************************/
 int isNumber(const char number[])
 {
     int i = 0;
@@ -151,7 +158,7 @@ int  main(int argc, char const *argv[]) {
                 }
                 n=atoi(argv[1]);
                 stu=atoi(argv[2]);
-                if((n<0)||(stu<0)||(stu>n))
+                if((n<0)||(stu<0)||(stu<n))
                 {
                         er:
                         printf("invalid input1");
@@ -168,6 +175,10 @@ int  main(int argc, char const *argv[]) {
                                          printf("invalid input2\n");
                                          return 0;
                                  }
+        if(stu==0)
+{
+return 0;
+}
 
                                  //dynamic allocation for structure
          struct student *array=malloc(sizeof(struct student)*stu);
@@ -181,7 +192,7 @@ int  main(int argc, char const *argv[]) {
                                          return 0;
                                  }
 
-        if(stu>n)
+        if(stu<n)
 {
         printf("invalid input4");
         return 0;
