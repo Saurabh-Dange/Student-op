@@ -1,4 +1,3 @@
-
 /*****************************************************************************
  *   PROJECT  :Read the data from given CSV file and perform following       *
  *   operations                                                              *
@@ -37,15 +36,17 @@ struct student
 /*****************************************************************************/
 //function declaration
 
-void getRecord(struct student array[]);
+void getRecord(struct student array[],int);
 
-void pScore(struct student array[]);
+void pScore(struct student array[],int);
 
-void pRank(struct student array[]);
+void pRank(struct student array[],int);
 
-void sort(struct student array[]);
+void sort(struct student array[],int);
 
-void Modify(struct student array[]);
+void Modify(struct student array[],int);
+
+int checkl(char []);
 /*****************************************************************************/
 
 /******************************************************************************
@@ -55,14 +56,14 @@ void Modify(struct student array[]);
  *   Description:used for fetching the record from provided csv file          *
  ******************************************************************************/
 
-void getRecord(struct  student array[]) {
+void getRecord(struct  student array[],int n) {
        FILE *fp;
         fp=fopen("details.csv","r");
         char name[1024];
         int i,k=0;
         char *arr;
         int j=0;
-  while((fscanf(fp,"%s",name)!=EOF)&&(j<15))
+  while((fscanf(fp,"%s",name)!=EOF)&&(j<n))
 
   {
 
@@ -120,7 +121,7 @@ void getRecord(struct  student array[]) {
  *   Description:used for printing the score according to rank                *
  ******************************************************************************/
 
- void pScore(struct student array[]) {
+ void pScore(struct student array[],int n) {
 
       int i;
       int ROLL;
@@ -130,11 +131,11 @@ void getRecord(struct  student array[]) {
       //validation
       if((scanf("%d",&ROLL))!=1)
       {
-        printf("invalid input ");
+        printf("invalid input 1");
         return  ;
       }
 
-      for(i=0;i<15;i++)
+      for(i=0;i<n;i++)
       {
 
               if(array[i].Roll_N==ROLL)
@@ -144,7 +145,11 @@ void getRecord(struct  student array[]) {
 
 
       }
-
+        if(i==n)
+{
+        printf("invalid input 2");
+        return;
+}
         printf("%d\n",array[i].marks);
 
 }
@@ -158,7 +163,7 @@ void getRecord(struct  student array[]) {
  *   Description:used for printing the rank of student                        *
  ******************************************************************************/
 
-void pRank(struct student  array[])
+void pRank(struct student  array[],int n)
 {
           char stu_name[20];
 
@@ -175,7 +180,7 @@ void pRank(struct student  array[])
             }
 
 
-            for(i=0;i<15;i++)
+            for(i=0;i<n;i++)
             {
 
 
@@ -186,8 +191,12 @@ void pRank(struct student  array[])
                 }
 
               }
-
-              for(j=14;j>=0;j--)
+                if(i==n)
+                {
+                        printf("invalid output");
+                        return;
+                }
+              for(j=n-1;j>=0;j--)
               {
                 if(array[j].marks>array[i].marks)
                 {
@@ -209,11 +218,11 @@ void pRank(struct student  array[])
  ******************************************************************************/
 
 
-void sort(struct student  array[])
+void sort(struct student  array[],int n)
 {
 
                 int i,j,key=0;
-                for(i=1;i<15;i++)
+                for(i=1;i<n;i++)
             {
 
                   key=array[i].marks;
@@ -243,10 +252,10 @@ void sort(struct student  array[])
  *   Description:used for making entry 0 for Repeater                            *
  ******************************************************************************/
 
-void Modify(struct student array[])
+void Modify(struct student array[],int n)
 {
           int i;
-            for(i=0;i<15;i++)
+            for(i=0;i<n;i++)
           {
 
           if((i==2)||(i==3)||(i==9)||(i==12))
@@ -264,14 +273,39 @@ void Modify(struct student array[])
 }
 /*****************************************************************************/
 
+/*****************************************************************************
+*  Function Name:checkl                                                      *
+*  Parameters passed:name of the file in form of string                      *
+*  Return Type:int                                                           *
+*  Description:This  function is used for counting the line of file          *
+*****************************************************************************/
+int checkl(char fname[])
+{
+        int count=0;
+        char c;
+        FILE *fp;
+        fp=fopen(fname,"r");
+        for (c = getc(fp); c != EOF; c = getc(fp))
+        if (c == '\n') // Increment count if this character is newline
+            count = count + 1;
+        return count;
+
+}
+
+
+/*****************************************************************************/
 int main() {
 
           int c;
+          int l;
+
+          l=checkl("details.csv");
+          l--;
 
 
 
 
-          getRecord(array);
+          getRecord(array,l);
           printf("Enter your choicen\n");
           printf("1:Enter roll number and get score\n");
           printf("2:Enter Name and get Rank\n");
@@ -282,15 +316,15 @@ int main() {
           }
 
           switch (c) {
-            case 1:pScore(array);
+            case 1:pScore(array,l);
                     break;
-            case 2: Modify(array);
-                    sort(array);
-                    pRank(array);
+            case 2: Modify(array,l);
+                    sort(array,l);
+                    pRank(array,l);
                     break;
+        default:printf("invalid input");
 
           }
 
           return 0;
 }
-
