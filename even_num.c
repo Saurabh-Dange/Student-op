@@ -1,11 +1,10 @@
-/*****************************************************************************
- *   PROJECT  :Print the n even number after k where both n and k are        *
+/*PROJECT  :Print the n even number after k where both n and k are        *
  *   user defined                                                            *
  *   FILE_NAME:even_num.c                                                    *
  *   VERSION  :1.0.0                                                         *
  *   DATE     :19/06/2017                                                    *
  *                                                                           *
- *	 Saurabh S Dange ©                                                       *
+ *       Saurabh S Dange ©                                                       *
  *   All rights reserved                                                     *
  *****************************************************************************/
  //Header files declaration
@@ -49,7 +48,7 @@ void print(int k,int n)
               k+=2;
 
         }
-        return;
+        return ;
 }
 //---------------------------------------------------------------------------//
 
@@ -69,7 +68,7 @@ int main()
       if (k<0) {
 
         printf("invalid input");
-        return;
+        return 0;
 
       }
       if (k%2==0) {
