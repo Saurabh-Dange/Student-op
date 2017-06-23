@@ -37,7 +37,7 @@ int  isNumber(const char []);
 
 /******************************************************************************
  *   Function Name:getRecord                                                  *
- *   Parameters passed:number of students,structure                           *
+ *   Parameters passed:number of students,structure                           * 
  *   Return Type: int                                                         *
  *   Description:used for storing the input in the structure                  *
  ******************************************************************************/
